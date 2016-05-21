@@ -13,7 +13,7 @@ var del         = require('del');
 
 // Enter URL of your local server here
 // Example: 'http://localwebsite.dev'
-var URL = '';
+var URL = 'http://localhost:8888';
 
 // Check for --production flag
 var isProduction = !!(argv.production);
@@ -56,6 +56,9 @@ var PATHS = {
 
     // Motion UI
     'assets/components/motion-ui/motion-ui.js',
+
+    // Skrollr
+    'assets/components/skrollr/dist/skrollr.min.js',
 
     // Include your own custom scripts (located in the custom folder)
     'assets/javascript/custom/*.js',

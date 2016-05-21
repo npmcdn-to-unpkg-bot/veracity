@@ -1,15 +1,9 @@
-/* Navigation breakpoints */
-
-.desktop-menu, .top-bar-left {
-  @include show-for(medium);
+.home-link {
+  cursor: pointer;
 }
-
-#mobile-menu, .title-bar {
-  @include hide-for(medium);
-}
+.slide-down {}
 
 /* Mobile menu */
-
 .off-canvas {
  > ul.menu {
     height: 100vh;
@@ -20,35 +14,37 @@
 .title-bar-title {
   a {
     font-size: 1rem;
-    color: #B9B9B9;
+    color: $black;
   }
 }
 
 /* Tablet and desktop menu */
 .top-bar {
-
+  height: 80px;
+  #menu-primary {
+    justify-content: flex-end;
+  }
   .menu .home a {
     font-size: 1rem;
-    color: #B9B9B9;
+    color: $black;
   }
-
   .menu a {
-    height: 45px;
-    line-height: 45px;
-    color: #e6e6e6;
+    display: block;
+    line-height: 80px;
+    color: $dark-gray;
+    text-transform: uppercase;
     padding-top: 0;
     padding-bottom: 0;
-    font-weight: bold;
-    font-size: 0.8rem;
+    font-weight: 700;
+    font-size: 13px;
     line-height: 1;
-
+    letter-spacing: 1px;
     &:hover:not(.button) {
-      background-color: #2a2a2a;
+      background-color: none;
     }
   }
 
   .menu>li:not(.menu-text)>a { padding: 1rem; }
-  .menu li:not(:last-child) { border-right: 1px solid #4e4e4e; }
 
   .dropdown.menu .submenu {
     background-color: #121212;
@@ -65,4 +61,31 @@
       display: none;
     }
 
+}
+
+/* LOAD BAR */
+#loadBar {
+  position: relative;
+  height: 7px;
+  width: 100%;
+  background-color: $black;
+  transition: all 0.25s ease;
+  > span {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+  }
+  &.hover {
+    height: 11px;
+  }
+}
+
+/* Navigation breakpoints */
+.desktop-menu, .top-bar-left {
+  @include show-for(medium);
+}
+
+#mobile-menu, .title-bar {
+  @include hide-for(medium);
 }

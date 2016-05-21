@@ -8,6 +8,9 @@
  * @since FoundationPress 1.0.0
  */
 
+$primaryColor = get_field( 'primary_color' );
+$secondaryColor = get_field( 'secondary_color' );
+
 ?>
 <!doctype html>
 <html class="no-js" <?php language_attributes(); ?> >
@@ -15,8 +18,24 @@
 		<meta charset="<?php bloginfo( 'charset' ); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<?php wp_head(); ?>
+		<script src="https://use.typekit.net/kud3sdw.js"></script>
+		<script>try{Typekit.load({ async: true });}catch(e){}</script>
+		<style>
+			.top-bar .menu .colorize a, .home-link.colorize path {
+				color: <?= $primaryColor ?>;
+				fill: <?= $primaryColor ?>;
+			}
+			.top-bar .menu .colorize a:hover, .home-link.colorize:hover path {
+		    color: <?= $secondaryColor ?>;
+				fill: <?= $secondaryColor ?>;
+		  }
+			h1 {
+				color: <?= $primaryColor ?>
+			}
+		</style>
 	</head>
 	<body <?php body_class(); ?>>
+	<div id="skrollr-body">
 	<?php do_action( 'foundationpress_after_body' ); ?>
 
 	<?php if ( get_theme_mod( 'wpt_mobile_menu_layout' ) == 'offcanvas' ) : ?>
@@ -27,18 +46,59 @@
 
 	<?php do_action( 'foundationpress_layout_start' ); ?>
 
+	<!-- Contact -->
+	<section id="contactForm" style="background-color: <?= $primaryColor ?>">
+		<div class="row align-center">
+			<div class="small-4 columns text-center">
+				<h5 class="contrast-text upper"><strong>Pleased to meet you</strong></h5>
+				<br><br>
+				<form>
+					<div class="inputs">
+						<div class="field">
+							<input id="contactName" class="float-input" type="text" name="name" placeholder="Full Name" />
+							<label for="name">Full Name</label>
+						</div>
+						<div class="field">
+							<input id="contactEmail" class="float-input" type="email" name="email" placeholder="Email Address" />
+							<label for="email">Email Address</label>
+						</div>
+						<textarea id="contactMessage" placeholder="I'm Contacting Because..."></textarea>
+					</div>
+					<input id="formSubmit" value="Send" name="send" class="button white hollow expanded disabled" />
+				</form>
+				<button class="button round secondary" id="closeForm">X</button>
+			</div>
+		</div>
+	</section>
+	<div id="loadBar">
+		<span style="background-color: <?= $primaryColor ?>;width: 0">&nbsp;</span>
+	</div>
 	<header id="masthead" class="site-header" role="banner">
 		<div class="title-bar" data-responsive-toggle="site-navigation">
 			<button class="menu-icon" type="button" data-toggle="mobile-menu"></button>
 			<div class="title-bar-title">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+
+				</a>
 			</div>
 		</div>
 
 		<nav id="site-navigation" class="main-navigation top-bar" role="navigation">
 			<div class="top-bar-left">
 				<ul class="menu">
-					<li class="home"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></li>
+					<li class="home-link">
+						<!-- LOGO -->
+						<a href="/home">
+							<svg width="26px" height="35px" viewBox="0 0 26 35">
+							    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+							        <g id="screenshot" transform="translate(-138.000000, -95.000000)" fill="#231F20">
+							            <path d="M138.077431,95.0380317 L148.763833,95.0380317 L143.083885,120.890652 L138.077431,95.0380317 Z M153.114935,95.1115839 L163.983754,95.1115839 L156.862665,129.098589 L145.269203,129.098589 L153.114935,95.1115839 Z" id="veracityLogo" class="veracity-logo"></path>
+							        </g>
+							    </g>
+							</svg>
+						</a>
+						<!-- <?php bloginfo( 'name' ); ?> -->
+				</li>
 				</ul>
 			</div>
 			<div class="top-bar-right">
@@ -50,6 +110,6 @@
 			</div>
 		</nav>
 	</header>
-
 	<section class="container">
+		<div class="overlay"></div>
 		<?php do_action( 'foundationpress_after_header' );

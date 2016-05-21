@@ -1,0 +1,29 @@
+#singleWork {
+  @include grid-row();
+  margin-top: 3rem;
+
+  .main-content {
+    background: $white;
+    padding: 20px!important;
+    position: relative;
+    transform: translate(0, 100px);
+    @include grid-column(12);
+
+    @include breakpoint(medium) {
+      padding: 40px!important;
+      @include grid-column(8);
+    }
+    &.animate-in {
+      transition: all 1s ease;
+    }
+  }
+  .sidebar {
+    div {
+      margin-bottom: 24px;
+      line-height: 1.7;
+      span {
+        font-weight: 400
+      }
+    }
+  }
+}

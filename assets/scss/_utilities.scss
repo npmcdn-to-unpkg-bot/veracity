@@ -1,0 +1,127 @@
+html, body {
+  height: 100% !important;
+  height: auto;
+}
+path {
+  fill: black;
+  transition: fill .5s !important;
+}
+
+// Typography
+h5 {
+  letter-spacing: 1.5px;
+  strong {
+    font-weight: 600;
+  }
+}
+.upper {
+  text-transform: uppercase;
+}
+a {
+  transition: all 0.5s ease-in-out;
+}
+
+// buttons
+.round {
+  border-radius: 100px;
+}
+.white {
+  background-color: $white;
+  color: $black;
+  &.hollow {
+    border-color: $white;
+    color: $white;
+    background: transparent;
+    &:hover {
+      background: $white;
+      color: $black;
+    }
+  }
+}
+
+// Image Helpers
+.columns img {
+  width: 100%;
+  height: auto;
+}
+
+// Padding
+.pad {
+  padding: 30px 0;
+}
+.pad-large {
+  padding: 90px 0;
+}
+
+// Contrast
+.contrast-text {
+  color: $white;
+}
+
+// Overlay
+.container {
+  position: relative;
+}
+.overlay {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  z-index: 100;
+  height: 100%;
+  width: 100%;
+  background: rgba($white, 0.5);
+  transition: all 0.5s ease;
+  &.visible {
+    opacity: 1;
+	  visibility: visible;
+  }
+}
+
+
+// Markdown classes
+$margin: 40px;
+#contentBody {
+  .row {
+    margin: $margin 0 0;
+  }
+}
+.flex-video {
+  margin: $margin 0;
+}
+.flex-wrap {
+  padding: 0!important;
+  .columns {
+    @include flex-grid-column(6);
+    &:only-child, &:nth-child(3n) {
+      @include flex-grid-column(12);
+    }
+    @include breakpoint(medium) {
+      @include flex-grid-column();
+      &:only-child, &:nth-child(3n) {
+        @include flex-grid-column();
+      }
+    }
+    img {
+      width: 100%; height: auto;
+    }
+  }
+}
+p + blockquote {
+  margin: $margin 0 $margin;
+}
+blockquote {
+  font-style: italic;
+  font-size: 22px;
+  border-left: 4px solid $secondary-color;
+  margin: $margin 0;
+  padding-top: 0;
+  p {
+    color: $medium-gray;
+    line-height: 26px;
+    padding: 0;
+    margin: 0;
+  }
+  strong {
+    font-weight: bold;
+  }
+}

@@ -80,10 +80,11 @@
 @import "modules/footer";
 @import "modules/sidebar";
 @import "modules/contact";
+@import "modules/featured-image";
+
 
 // Components
 @import "components/buttons";
-@import "components/featured-image";
 @import "components/dividers";
 @import "components/links";
 
@@ -94,7 +95,8 @@
 @import "templates/page-sidebar-left";
 @import "templates/page-full-width";
 @import "templates/single-post";
-@import "templates/single-work";
+@import "templates/work";
+@import "templates/team";
 
 /* Utilities */
 @import "utilities";

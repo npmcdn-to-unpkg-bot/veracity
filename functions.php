@@ -47,5 +47,22 @@ require_once( 'library/sticky-posts.php' );
 /** Configure responsive image sizes */
 require_once( 'library/responsive-images.php' );
 
+/** Configure convert color to hex */
+require_once( 'library/hex.php' );
+
 /** If your site requires protocol relative url's for theme assets, uncomment the line below */
 // require_once( 'library/protocol-relative-theme-assets.php' );
+
+
+// CUSTOM FIELD functions
+if( function_exists('acf_add_options_page') ) {
+
+	acf_add_options_page(array(
+		'page_title' 	=> 'Page Themes',
+		'menu_title'	=> 'Page Themes',
+		'menu_slug' 	=> 'page-themes',
+		'capability'	=> 'edit_posts',
+		'redirect'		=> false
+	));
+
+}

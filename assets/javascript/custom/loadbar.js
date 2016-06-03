@@ -3,7 +3,7 @@ $(function() {
 });
 
 // Sequential nav color fade in
-$('#menu-primary li').each(function(index, element) {
+$('.desktop-menu li').each(function(index, element) {
     $(element).delay(index*300).queue(function(){
       $(this).addClass('colorize');
     });
@@ -20,8 +20,15 @@ setTimeout(function(){
 
 setTimeout(function(){
   $('.main-content').addClass('animate-in').css({"transform":"translate(0,0)"});
+  skrollr.init();
+
+  if (skrollr.init().isMobile()) {
+      skrollr.init().destroy();
+  }
+  $('.parallax-bg').addClass('animate-in').css({"opacity": "1"});
 }, 700);
 
 setTimeout(function(){
   $('.main-content').removeClass('animate-in');
+  $('.parallax-bg').removeClass('animate-in');
 }, 1800);

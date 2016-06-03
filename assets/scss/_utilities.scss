@@ -2,6 +2,12 @@ html, body {
   height: 100% !important;
   height: auto;
 }
+body.fixed, body.video-fixed {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  overflow: hidden;
+}
 path {
   fill: black;
   transition: fill .5s !important;
@@ -25,6 +31,9 @@ a {
 .round {
   border-radius: 100px;
 }
+.radius {
+  border-radius: 3px;
+}
 .white {
   background-color: $white;
   color: $black;
@@ -36,6 +45,14 @@ a {
       background: $white;
       color: $black;
     }
+  }
+}
+.button-jar {
+  @include flex();
+  @include flex-align(right, middle);
+  a {
+    flex: 0 1 auto;
+    margin-left: 4px;
   }
 }
 
@@ -66,10 +83,10 @@ a {
   visibility: hidden;
   opacity: 0;
   position: absolute;
-  z-index: 100;
+  z-index: 40;
   height: 100%;
   width: 100%;
-  background: rgba($white, 0.5);
+  background: rgba($white, 0.8);
   transition: all 0.5s ease;
   &.visible {
     opacity: 1;
@@ -77,12 +94,63 @@ a {
   }
 }
 
+// Parallax
+.parallax-parent {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  .parallax-bg {
+    height: 100%;
+    width: 100%;
+    background-attachment: fixed;
+    background-size: cover!important;
+    background-repeat: no-repeat;
+    position: fixed;
+    z-index: 0;
+    transform: scale(1.2);
+    opacity: 0;
+    &.animate-in {
+      transition: all 0.5s ease;
+    }
+  }
+}
+
 
 // Markdown classes
 $margin: 40px;
 #contentBody {
-  .row {
-    margin: $margin 0 0;
+  .content .columns {
+    & > p:last-of-type {
+      margin-bottom: 0
+    }
+    & > :only-child {
+      margin: $margin 0;
+    }
+    & > :last-child {
+      margin-bottom: $margin!important;
+    }
+    & > :first-child {
+      margin-top: $margin!important;
+    }
+  }
+  h1, h2, h3, h4, h5 {
+    a {
+      cursor: text;
+      color: $black;
+    }
+  }
+  h2 {
+
+  }
+  h3 {
+
+  }
+  h4 {
+
+  }
+  p {
+    width: 100%;
+    margin-bottom: $margin/2;
   }
 }
 .flex-video {
@@ -90,10 +158,12 @@ $margin: 40px;
 }
 .flex-wrap {
   padding: 0!important;
+  margin: 0!important;
   .columns {
     @include flex-grid-column(6);
     &:only-child, &:nth-child(3n) {
       @include flex-grid-column(12);
+      padding: 0!important
     }
     @include breakpoint(medium) {
       @include flex-grid-column();
@@ -111,17 +181,67 @@ p + blockquote {
 }
 blockquote {
   font-style: italic;
-  font-size: 22px;
-  border-left: 4px solid $secondary-color;
+  border-left: 6px solid $primary-color;
   margin: $margin 0;
   padding-top: 0;
   p {
-    color: $medium-gray;
-    line-height: 26px;
+    color: $dark-gray;
+    font-weight: 600;
     padding: 0;
-    margin: 0;
+    font-size: 20px;
+    line-height: 28px;
+    font-style: normal;
+  }
+  em {
+    color: $medium-gray;
+    font-weight: 400;
+    font-style: normal;
   }
   strong {
     font-weight: bold;
   }
 }
+
+.push-down {
+  margin-top: 0!important;
+  transition: all 0.25s ease;
+}
+.sticky-container {
+  transition: all 0.5s ease;
+}
+.push-up {
+  margin-top: -87px;
+}
+.blow-up {
+  transform: scale(3)!important;
+  opacity: 0!important;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// Wordpress Logged in classes
+// .admin-bar {
+//   #masthead {
+//     top: 46px;
+//     &.unstuck {
+//       top: 0!important;
+//     }
+//
+//     @include breakpoint(medium) {
+//       top: 32px;
+//       &.unstuck {
+//         top: 0!important;
+//       }
+//     }
+//   }
+// }

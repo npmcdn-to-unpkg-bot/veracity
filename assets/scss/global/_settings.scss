@@ -68,7 +68,7 @@ $global-margin: 1rem;
 $global-padding: 1rem;
 $global-weight-normal: 400;
 $global-weight-bold: bold;
-$global-radius: 0;
+$global-radius: 3;
 $global-text-direction: ltr;
 $global-flexbox: true;
 $print-transparent-backgrounds: true;
@@ -93,8 +93,9 @@ $breakpoint-classes: (small medium large);
 $grid-row-width: $global-width;
 $grid-column-count: 12;
 $grid-column-gutter: (
-  small: 20px,
-  medium: 30px,
+  small: 40px,
+  medium: 40px,
+  large: 40px,
 );
 $grid-column-align-edge: true;
 $block-grid-max: 8;
@@ -380,7 +381,7 @@ $menu-margin: 0;
 $menu-margin-nested: 1rem;
 $menu-item-padding: 0.7rem 1rem;
 $menu-item-color-active: $white;
-$menu-item-background-active: #121212;
+$menu-item-background-active: transparent;
 $menu-icon-spacing: 0.25rem;
 
 // 23. Meter
@@ -539,8 +540,8 @@ $titlebar-background: $white;
 $titlebar-color: $black;
 $titlebar-padding: 0.5rem;
 $titlebar-text-font-weight: bold;
-$titlebar-icon-color: $white;
-$titlebar-icon-color-hover: $medium-gray;
+$titlebar-icon-color: $primary-color;
+$titlebar-icon-color-hover: darken($primary-color, 10%);
 $titlebar-icon-spacing: 0.25rem;
 
 // 35. Tooltip

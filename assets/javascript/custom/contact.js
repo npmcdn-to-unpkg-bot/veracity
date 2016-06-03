@@ -16,6 +16,11 @@ $('a[href=#contact]').click(function(){
   $('#contactForm').slideToggle( "slow", function() {});
   $('.overlay').toggleClass('visible');
   $('#closeForm').toggleClass('visible');
+  $('body').toggleClass("contact");
+
+  if (!$('body').hasClass('mobile-nav')) {
+    $('body').toggleClass("fixed");
+  }
 });
 
 // Close Form Button
@@ -23,9 +28,37 @@ $('#closeForm').click(function(){
   $('#contactForm').slideUp( "slow", function() {});
   $('.overlay').removeClass('visible');
   $('#closeForm').removeClass('visible');
+  $('body').removeClass("contact");
+
+  if (!$('body').hasClass('mobile-nav')) {
+    $('body').removeClass("fixed");
+  }
 });
 
+$(window).on('changed.zf.mediaquery', function(event, newSize, oldSize){
+  if(newSize ==  "medium") {
+    if (oldSize == "small") {
+      $('#contactForm').slideUp();
+      $('body').removeClass("fixed");
+      $('#closeForm').removeClass('visible');
+      $('.overlay').removeClass('visible');
+    }
+  }
+  if(newSize ==  "small") {
+    if (oldSize == "medium") {
+      $('#contactForm').slideUp();
+      $('body').removeClass("fixed");
+      $('#closeForm').removeClass('visible');
+      $('.overlay').removeClass('visible');
+    }
+  }
+
+});
+
+////////////////////////////////////////
 // Validation
+////////////////////////////////////////
+
 // Name can't be blank
 $('#contactName').on('input', function() {
 	var input=$(this);

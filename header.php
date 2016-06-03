@@ -8,8 +8,16 @@
  * @since FoundationPress 1.0.0
  */
 
-$primaryColor = get_field( 'primary_color' );
-$secondaryColor = get_field( 'secondary_color' );
+ if ( is_post_type_archive('work') ) {
+	 $primaryColor = get_field( 'work_primary_color', 'option' );
+	 $secondaryColor = get_field( 'work_secondary_color', 'option' );
+ } elseif ( is_post_type_archive('team') ) {
+	 $primaryColor = get_field( 'team_primary_color', 'option' );
+	 $secondaryColor = get_field( 'team_secondary_color', 'option' );
+ } else {
+	 $primaryColor = get_field( 'primary_color' );
+	 $secondaryColor = get_field( 'secondary_color' );
+ }
 
 ?>
 <!doctype html>
@@ -29,9 +37,25 @@ $secondaryColor = get_field( 'secondary_color' );
 		    color: <?= $secondaryColor ?>;
 				fill: <?= $secondaryColor ?>;
 		  }
+      #mobileMenu, #mobileMenu ul {
+        background-color: <?= $primaryColor ?>;
+      }
+      #mobileToggle.menu-icon::after {
+        background: <?= $primaryColor ?>;
+        box-shadow: 0 7px 0 <?= $primaryColor ?>, 0 14px 0 <?= $primaryColor ?>;
+      }
 			h1 {
 				color: <?= $primaryColor ?>
 			}
+      .main-content blockquote {
+        border-color: <?= $primaryColor ?>
+      }
+      .main-content .social-nav a:hover {
+        color: <?= $primaryColor ?>!important;
+      }
+      .feature-overlay {
+        background: <?= $primaryColor ?>;
+      }
 		</style>
 	</head>
 	<body <?php body_class(); ?>>
@@ -49,7 +73,7 @@ $secondaryColor = get_field( 'secondary_color' );
 	<!-- Contact -->
 	<section id="contactForm" style="background-color: <?= $primaryColor ?>">
 		<div class="row align-center">
-			<div class="small-4 columns text-center">
+			<div class="small-10 medium-6 large-4 columns text-center">
 				<h5 class="contrast-text upper"><strong>Pleased to meet you</strong></h5>
 				<br><br>
 				<form>
@@ -70,46 +94,59 @@ $secondaryColor = get_field( 'secondary_color' );
 			</div>
 		</div>
 	</section>
-	<div id="loadBar">
-		<span style="background-color: <?= $primaryColor ?>;width: 0">&nbsp;</span>
-	</div>
-	<header id="masthead" class="site-header" role="banner">
-		<div class="title-bar" data-responsive-toggle="site-navigation">
-			<button class="menu-icon" type="button" data-toggle="mobile-menu"></button>
-			<div class="title-bar-title">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
 
-				</a>
-			</div>
-		</div>
+  <section id="mobileMenu" class="menu">
+    <?php if ( ! get_theme_mod( 'wpt_mobile_menu_layout' ) || get_theme_mod( 'wpt_mobile_menu_layout' ) == 'topbar' ) : ?>
+      <?php get_template_part( 'template-parts/mobile-top-bar' ); ?>
+    <?php endif; ?>
+  </section>
 
-		<nav id="site-navigation" class="main-navigation top-bar" role="navigation">
-			<div class="top-bar-left">
-				<ul class="menu">
-					<li class="home-link">
-						<!-- LOGO -->
-						<a href="/home">
-							<svg width="26px" height="35px" viewBox="0 0 26 35">
-							    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-							        <g id="screenshot" transform="translate(-138.000000, -95.000000)" fill="#231F20">
-							            <path d="M138.077431,95.0380317 L148.763833,95.0380317 L143.083885,120.890652 L138.077431,95.0380317 Z M153.114935,95.1115839 L163.983754,95.1115839 L156.862665,129.098589 L145.269203,129.098589 L153.114935,95.1115839 Z" id="veracityLogo" class="veracity-logo"></path>
-							        </g>
-							    </g>
-							</svg>
-						</a>
-						<!-- <?php bloginfo( 'name' ); ?> -->
-				</li>
-				</ul>
-			</div>
-			<div class="top-bar-right">
-				<?php foundationpress_top_bar_r(); ?>
+  <div id="navBar" data-sticky-container>
+  	<header id="masthead" class="site-header" role="banner" data-sticky data-options="marginTop:0;">
+      <div id="loadBar">
+    		<span style="background-color: <?= $primaryColor ?>;width: 0">&nbsp;</span>
+    	</div>
+  		<div class="title-bar" data-responsive-toggle="site-navigation">
+  			<div class="title-bar-title">
+          <a class="home-link" href="/home">
+            <svg width="26px" height="35px" viewBox="0 0 26 35">
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="screenshot" transform="translate(-138.000000, -95.000000)" fill="#231F20">
+                        <path d="M138.077431,95.0380317 L148.763833,95.0380317 L143.083885,120.890652 L138.077431,95.0380317 Z M153.114935,95.1115839 L163.983754,95.1115839 L156.862665,129.098589 L145.269203,129.098589 L153.114935,95.1115839 Z" id="veracityLogo" class="veracity-logo"></path>
+                    </g>
+                </g>
+            </svg>
+          </a>
+  			</div>
+        <button id="mobileToggle" class="menu-icon" type="button"></button>
 
-				<?php if ( ! get_theme_mod( 'wpt_mobile_menu_layout' ) || get_theme_mod( 'wpt_mobile_menu_layout' ) == 'topbar' ) : ?>
-					<?php get_template_part( 'template-parts/mobile-top-bar' ); ?>
-				<?php endif; ?>
-			</div>
-		</nav>
-	</header>
+  		</div>
+
+  		<nav id="site-navigation" class="main-navigation top-bar" role="navigation" style="width:100%">
+  			<div class="top-bar-left">
+  				<ul class="menu">
+  					<li class="home-link">
+  						<!-- LOGO -->
+  						<a href="/home">
+  							<svg width="26px" height="35px" viewBox="0 0 26 35">
+  							    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+  							        <g id="screenshot" transform="translate(-138.000000, -95.000000)" fill="#231F20">
+  							            <path d="M138.077431,95.0380317 L148.763833,95.0380317 L143.083885,120.890652 L138.077431,95.0380317 Z M153.114935,95.1115839 L163.983754,95.1115839 L156.862665,129.098589 L145.269203,129.098589 L153.114935,95.1115839 Z" id="veracityLogo" class="veracity-logo"></path>
+  							        </g>
+  							    </g>
+  							</svg>
+  						</a>
+  						<!-- <?php bloginfo( 'name' ); ?> -->
+  				</li>
+  				</ul>
+  			</div>
+  			<div class="top-bar-right">
+  				<?php foundationpress_top_bar_r(); ?>
+  			</div>
+  		</nav>
+  	</header>
+  </div>
+
 	<section class="container">
 		<div class="overlay"></div>
 		<?php do_action( 'foundationpress_after_header' );

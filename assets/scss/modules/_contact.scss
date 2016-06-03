@@ -1,6 +1,15 @@
 #contactForm {
   padding: 120px 0;
   position: relative;
+  display: none;
+  @include flex;
+  @include flex-align(center, middle);
+  height: calc(100vh - 80px);
+  width: 100%;
+  max-width: 100%;
+  .row {
+    width: 100%;
+  }
 }
 form {
   .field {

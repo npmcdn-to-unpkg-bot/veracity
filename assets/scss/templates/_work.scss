@@ -1,0 +1,132 @@
+#singleWork {
+  @include grid-row();
+
+  .main-content {
+    background: $white;
+    padding:40px 0!important;
+    position: relative;
+    z-index: 20;
+    transform: translate(0, 0);
+    @include grid-column(12);
+
+    @include breakpoint(medium) {
+      padding: 40px!important;
+      @include grid-column(8);
+      transform: translate(0, 100px);
+    }
+    &.animate-in {
+      transition: all 1s ease;
+    }
+    .row {
+      margin-top: 0;
+    }
+  }
+  .sidebar {
+    padding-top: 40px 20px!important;
+    transition: all 0.25s ease;
+    div {
+      margin-bottom: 24px;
+      line-height: 1.7;
+      span {
+        font-weight: 400
+      }
+    }
+  }
+}
+
+#archiveWork {
+  .work-grid {
+    width: 100%;
+    .work-block {
+      overflow: hidden;
+      position: relative;
+      max-height: 200px;
+      margin-bottom: 24px;
+      a {
+        display: block;
+        overflow: hidden;
+      }
+      .thumbnail-overlay {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0; left: 0;
+        background: rgba($primary-color, 0.6);
+        transition: all 0.5s ease;
+        opacity: 0;
+        .play {
+          height: 50%;
+          .columns {
+            position: relative;
+          }
+        }
+        span {
+          width: 20px;
+          height: 20px;
+          color: white;
+          font-size: 24px;
+          text-align: center;
+          display: block;
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          margin: auto;
+          opacity: 0;
+          transform: scale(0.25, 0.25);
+          transition: all 0.5s ease;
+          transition-delay: 0.2s;
+        }
+      }
+      .work-meta {
+        position: absolute;
+        width: 100%;
+        height: 34px;
+        left: 0;
+        bottom: 0;
+        margin: 0;
+        padding: 8px 0;
+        background: rgba($white, 0.9);
+        text-align: center;
+        transition: all 0.5s ease;
+        h2 {
+          font-size: 22px;
+          margin-bottom: 0;
+          transform: translate(0, 75%);
+          transition: all 0.5s ease;
+          transition-delay: 0.125s;
+          @include breakpoint(medium) {
+            font-size: 36px;
+          }
+        }
+        h4 {
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          font-size: 12px;
+          font-weight: 800;
+          margin-bottom: 0;
+          @include breakpoint(medium) {
+            font-size: 14px;
+          }
+        }
+      }
+      &:hover {
+        .thumbnail-overlay {
+          opacity: 1;
+          span {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        .work-meta {
+          height: 50%;
+          padding: 18px 0;
+          @include breakpoint(medium) {
+            padding: 24px 0;
+          }
+          h2 {
+            transform: translate(0, 0);
+          }
+        }
+      }
+    } // Close Work-Block
+  }
+}

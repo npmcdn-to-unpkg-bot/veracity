@@ -11,34 +11,36 @@ get_header(); ?>
 <?php get_template_part( 'template-parts/featured-image' ); ?>
 
 <section id="singleWork" role="main">
-<?php do_action( 'foundationpress_before_content' ); ?>
-<?php while ( have_posts() ) : the_post(); ?>
+	<?php while ( have_posts() ) : the_post(); // While we have a post let's show it off?>
 
-	<article <?php post_class('main-content') ?> id="post-<?php the_ID(); ?>"
-    data-bottom-top="margin-top: -100px;"
-    data-top-bottom="margin-top: -900px;">
-		<header>
-			<h1 class="entry-title"><?php the_title(); ?></h1>
-		</header>
-		<?php do_action( 'foundationpress_post_before_entry_content' ); ?>
+	<!-- MAIN CONTENT : Skrollr animation set to parralax the article up -->
+	<article class="main-content" id="post-<?php the_ID(); ?>"
+    data-0="margin-top: -60px;"
+    data-top-bottom="margin-top: -800px;">
 		<div id="contentBody" class="entry-content">
+			<header id="contentHeader">
+				<h1 class="entry-title"><?php the_title(); ?></h1>
+			</header>
 
-		<?php the_content(); ?>
+			<!-- Note: #contentBody is heavily formatted by javascript cause of the returned MarkDown -->
+			<?php the_content(); ?>
+
+			<footer id="contentFooter">
+				<?php wp_link_pages( array('before' => '<nav id="page-nav"><p>' . __( 'Pages:', 'foundationpress' ), 'after' => '</p></nav>' ) ); ?>
+				<p><?php the_tags(); ?></p>
+			</footer>
 		</div>
-		<footer>
-			<?php wp_link_pages( array('before' => '<nav id="page-nav"><p>' . __( 'Pages:', 'foundationpress' ), 'after' => '</p></nav>' ) ); ?>
-			<p><?php the_tags(); ?></p>
-		</footer>
 		<?php do_action( 'foundationpress_post_before_comments' ); ?>
 		<?php comments_template(); ?>
 		<?php do_action( 'foundationpress_post_after_comments' ); ?>
 	</article>
+	<!-- CLOSE MAIN CONTENT -->
 <?php endwhile;?>
 
-<?php do_action( 'foundationpress_after_content' ); ?>
-<aside class="sidebar">
+<!-- SIDEBAR -->
+<aside class="sidebar" id="workSidebar">
   <div clas="row" data-sticky-container>
-    <div class="sticky" data-sticky data-anchor="singleWork" data-check-every="0">
+    <div class="sticky" data-sticky data-top-anchor="workSidebar:top" data-btm-anchor="contentFooter:top" data-check-every="0" data-options="marginTop:6;">
       <span><?php the_field('completion_date'); ?></span><br>
 
 			<!-- CREDITS SECTION -->
@@ -48,6 +50,7 @@ get_header(); ?>
 					while ( have_rows('credits') ) { the_row();
 						$title = get_sub_field('title');
 						if (get_sub_field('veracity_employee') == true) {
+								// If Creditor is a Veracity Employee we grab information from the associated relationship
 								$posts = get_sub_field('team_member');
 								if( $posts ){
 									foreach( $posts as $p ) {
@@ -57,6 +60,7 @@ get_header(); ?>
 									}
 								}
 						} else {
+							// If Creditor isn't an employee we just plop out their name
 							$name = get_sub_field('name');
 							echo '<span>' . $title . ': <strong>' . $name . '</strong></span><br>';
 						}
@@ -77,11 +81,22 @@ get_header(); ?>
 					</div>
 				<?php endif; ?>
 
-				<!-- SHARE SECTION -->
+				<!-- SHARE SECTION TODO: Need to figure this out still-->
 				<span>Share:</span><br>
     </div>
   </div>
 </aside>
+<!-- CLOSE SIDEBAR -->
 </section>
+
+<script>
+	// This script allows us to bind the "play" function for the Wistia embed to a "click". How fun.
+	window._wq = window._wq || [];
+	_wq.push({ "<?php the_field('video_id'); ?>": function(video) {
+	  $(".feature-play").click(function(){
+	    video.play();
+	  });
+	}});
+</script>
 
 <?php get_footer();

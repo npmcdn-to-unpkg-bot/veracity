@@ -4,7 +4,7 @@ $("#featureVideo").fadeOut();
 $(".play").click(function(){
   $("body").addClass("video-fixed");
 
-  $("#featured-hero").addClass("video-reveal").removeClass("shrink");
+  $("#featured-hero").addClass("video-reveal click-to-close").removeClass("shrink");
   $(".feature-overlay").addClass("animate-in");
   $('#navBar').addClass('push-up');
 

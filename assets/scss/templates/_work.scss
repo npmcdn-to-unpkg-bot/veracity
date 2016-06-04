@@ -1,9 +1,10 @@
 #singleWork {
-  @include grid-row();
-
+  @include flex-grid-row();
   .main-content {
     background: $white;
-    padding:40px 0!important;
+    padding:40px 20px!important;
+    margin-top: 0;
+    margin-bottom: 60px;
     position: relative;
     z-index: 20;
     transform: translate(0, 0);
@@ -11,8 +12,12 @@
 
     @include breakpoint(medium) {
       padding: 40px!important;
-      @include grid-column(8);
+      margin-top: -60px;
+      @include grid-column(11);
       transform: translate(0, 100px);
+    }
+    @include breakpoint(large) {
+      @include grid-column(8);
     }
     &.animate-in {
       transition: all 1s ease;
@@ -22,7 +27,7 @@
     }
   }
   .sidebar {
-    padding-top: 40px 20px!important;
+    padding: 20px 40px 60px!important;
     transition: all 0.25s ease;
     div {
       margin-bottom: 24px;
@@ -129,4 +134,7 @@
       }
     } // Close Work-Block
   }
+}
+.click-to-close {
+  cursor: pointer;
 }

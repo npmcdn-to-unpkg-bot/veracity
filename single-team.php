@@ -7,7 +7,7 @@
  */
 
 get_header(); ?>
-<div class="show-for-small-only">
+<div class="hide-for-large">
 <?php get_template_part( 'template-parts/featured-image' ); ?>
 </div>
 
@@ -17,8 +17,8 @@ get_header(); ?>
 		data-top-bottom="background-position: 50% -200px"
 		data-anchor-target="#teamContent">
 	</div>
-	<div class="row align-right expanded collapse">
-		<div class="columns small-12 medium-9 large-7">
+	<div class="team-container row expanded collapse">
+		<div class="columns small-11 large-7">
 		<?php do_action( 'foundationpress_before_content' ); ?>
 		<?php while ( have_posts() ) : the_post(); ?>
 
@@ -36,6 +36,7 @@ get_header(); ?>
 
 				<?php
 					if( have_rows('links') ) {
+						echo "<footer>";
 						echo "<nav class=\"social-nav\">";
 						while ( have_rows('links') ) { the_row();
 							$url = get_sub_field('url');
@@ -44,6 +45,7 @@ get_header(); ?>
 							echo "</a>";
 						}
 						echo "</nav>";
+						echo "</footer>";
 					}
 				?>
 				</div>

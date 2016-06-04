@@ -1,8 +1,18 @@
 #singleTeam {
+  overflow: visible!important;
+  .team-container {
+    @include flex-grid-row-align(center, middle);
+    @include breakpoint(large) {
+      @include flex-grid-row-align(right, middle);
+    }
+  }
   .main-content {
     background: $white;
     padding: 40px 20px;
     transform: translate(0, 0);
+    position: relative;
+    z-index: 200;
+    margin-top: -30px;
     h1 {
       font-size: 46px;
       color: darken($dark-gray, 10%);
@@ -23,12 +33,14 @@
     }
 
     @include breakpoint(medium) {
-      margin: 60px;
-      padding: 80px 40px;
+      margin: -60px 60px inherit;
+      padding: 40px;
       transform: translate(0, 100px);
     }
     @include breakpoint(large) {
+      margin: 60px;
       padding: 80px 40px;
+      transform: translate(0, 100px);
     }
     &.animate-in {
       transition: all 1s ease;
@@ -47,7 +59,7 @@
   }
   .parallax-bg {
     display: none;
-    @include breakpoint(medium) {
+    @include breakpoint(large) {
       display: block;
     }
   }

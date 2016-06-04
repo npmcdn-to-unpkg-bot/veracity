@@ -27,7 +27,7 @@
 		<div class="feature-overlay"></div>
 
 		<div id="featureVideo" class="row collapse video-container align-center">
-		  <div class="large-11 columns">
+		  <div class="small-11 columns">
 		    <div class="flex-video widescreen">
 					<!-- WISTIA EMBED CODE -->
 					<script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>

@@ -13,7 +13,6 @@
 		overflow: hidden;
 		@include flex();
 		@include flex-align(center, middle);
-		cursor: pointer;
 		&.hidden {
 			height:0!important;
 		}
@@ -45,6 +44,7 @@
 			.feature-play {
 				opacity: 1;
 				transform: scale(1);
+				cursor: pointer;
 				i {
 					opacity: 1;
 					transform: scale(1);

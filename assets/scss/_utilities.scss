@@ -78,6 +78,7 @@ a {
 // Overlay
 .container {
   position: relative;
+  background: #fafafa;
 }
 .overlay {
   visibility: hidden;
@@ -126,10 +127,10 @@ $margin: 40px;
     & > :only-child {
       margin: $margin 0;
     }
-    & > :last-child {
+    & > :last-child:not(footer) {
       margin-bottom: $margin!important;
     }
-    & > :first-child {
+    & > :first-child:not(header) {
       margin-top: $margin!important;
     }
   }
@@ -154,7 +155,7 @@ $margin: 40px;
   }
 }
 .flex-video {
-  margin: $margin 0;
+  margin: 0;
 }
 .flex-wrap {
   padding: 0!important;

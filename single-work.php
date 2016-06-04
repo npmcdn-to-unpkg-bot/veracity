@@ -10,7 +10,7 @@ get_header(); ?>
 
 <?php get_template_part( 'template-parts/featured-image' ); ?>
 
-<section id="singleWork" role="main">
+<section id="singleWork" class="align-center" role="main">
 	<?php while ( have_posts() ) : the_post(); // While we have a post let's show it off?>
 
 	<!-- MAIN CONTENT : Skrollr animation set to parralax the article up -->
@@ -38,7 +38,7 @@ get_header(); ?>
 <?php endwhile;?>
 
 <!-- SIDEBAR -->
-<aside class="sidebar" id="workSidebar">
+<aside class="sidebar show-for-large" id="workSidebar">
   <div clas="row" data-sticky-container>
     <div class="sticky" data-sticky data-top-anchor="workSidebar:top" data-btm-anchor="contentFooter:top" data-check-every="0" data-options="marginTop:6;">
       <span><?php the_field('completion_date'); ?></span><br>

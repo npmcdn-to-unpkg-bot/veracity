@@ -25,6 +25,22 @@
 	<head>
 		<meta charset="<?php bloginfo( 'charset' ); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-site-verification" content="D75mcBbFpurEh5x_YA2-r91ntoWT4_SZxcXTSiTLcUQ">
+
+    <!-- Facebook Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '613751512109020');
+    fbq('track', "PageView");
+    </script>
+    <noscript>&lt;img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=613751512109020&amp;ev=PageView&amp;noscript=1"/&gt;</noscript>
+    <!-- End Facebook Pixel Code -->
+
 		<?php wp_head(); ?>
 		<script src="https://use.typekit.net/kud3sdw.js"></script>
 		<script>try{Typekit.load({ async: true });}catch(e){}</script>
@@ -71,7 +87,7 @@
 	<?php do_action( 'foundationpress_layout_start' ); ?>
 
 	<!-- Contact -->
-	<section id="contactForm" style="background-color: <?= $primaryColor ?>">
+	<section id="contactForm" style="background-color: <?= $primaryColor ?>; display: none;">
 		<div class="row align-center">
 			<div class="small-10 medium-6 large-4 columns text-center">
 				<h5 class="contrast-text upper"><strong>Pleased to meet you</strong></h5>
@@ -95,7 +111,7 @@
 		</div>
 	</section>
 
-  <section id="mobileMenu" class="menu">
+  <section id="mobileMenu" class="menu" style="display:none;">
     <?php if ( ! get_theme_mod( 'wpt_mobile_menu_layout' ) || get_theme_mod( 'wpt_mobile_menu_layout' ) == 'topbar' ) : ?>
       <?php get_template_part( 'template-parts/mobile-top-bar' ); ?>
     <?php endif; ?>

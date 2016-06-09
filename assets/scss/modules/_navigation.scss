@@ -10,21 +10,7 @@
     padding: 1rem;
   }
 }
-#navBar {
-  position: relative!important;
-  width: 100%;
-  display: block;
-  height: 80px;
-  top: 0; left: 0;
-  z-index: 400;
-  transition: all .6s ease;
-  @include breakpoint(medium) {
-    position: fixed!important;
-  }
-  &.stick-down {
-    position: relative!important;
-  }
-}
+
 #mobileMenu {
   width: 100%;
   height: calc(100vh - 80px);

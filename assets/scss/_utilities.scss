@@ -2,9 +2,6 @@ html, body {
   height: 100% !important;
   height: auto;
 }
-body {
-  transition: padding 0.5s ease;
-}
 body.fixed, body.video-fixed {
   width: 100%;
   position: fixed;
@@ -83,13 +80,6 @@ a {
 .container {
   position: relative;
   background: #fafafa;
-  transition: all 0.5s ease;
-  @include breakpoint(medium) {
-    padding-top: 80px;
-  }
-  &.no-pad {
-    padding-top: 0!important;
-  }
 }
 .overlay {
   visibility: hidden;

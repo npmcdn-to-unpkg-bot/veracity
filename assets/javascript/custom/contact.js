@@ -12,55 +12,26 @@ $('a[href=#contact]').hover(
 );
 
 // SlideToggle Contact Form
-$('a[href=#contact]').click(function() {
-  if($(this).hasClass("clicked")) {
-    $(this).removeClass("clicked");
-    $('.container').removeClass('no-pad');
-    $('#contactForm').slideUp( "slow", function() {
-      $('#navBar').removeClass('stick-down');
-    });
-    $('.overlay').removeClass('visible');
-    $('#closeForm').removeClass('visible');
-    $('body').removeClass("contact");
+$('a[href=#contact]').click(function(){
+  $('#contactForm').slideToggle( "slow", function() {});
+  $('.overlay').toggleClass('visible');
+  $('#closeForm').toggleClass('visible');
+  $('body').toggleClass("contact");
 
-    if (!$('body').hasClass('mobile-nav')) {
-      $('body').removeClass("fixed");
-    }
-  } else {
-    $(this).addClass("clicked");
-    $('#navBar').addClass('stick-down');
-    $('.container').addClass('no-pad');
-    $('#contactForm').slideDown( "slow", function() {});
-    $('.overlay').addClass('visible');
-    $('#closeForm').addClass('visible');
-    $('body').addClass("contact");
-
-    if (!$('body').hasClass('mobile-nav')) {
-      $('body').addClass("fixed");
-    }
+  if (!$('body').hasClass('mobile-nav')) {
+    $('body').toggleClass("fixed");
   }
 });
 
 // Close Form Button
 $('#closeForm').click(function(){
-  $('#contactForm').slideUp( "slow", function() {
-    $('#navBar').removeClass('stick-down');
-  });
+  $('#contactForm').slideUp( "slow", function() {});
   $('.overlay').removeClass('visible');
   $('#closeForm').removeClass('visible');
   $('body').removeClass("contact");
 
   if (!$('body').hasClass('mobile-nav')) {
     $('body').removeClass("fixed");
-  }
-});
-
-var distance = $('#navBar').offset().top,
-$window = $(window);
-
-$window.scroll(function() {
-  if ( $window.scrollTop() >= distance ) {
-      $('#navBar').removeClass('stick-down');
   }
 });
 

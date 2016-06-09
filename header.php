@@ -117,8 +117,8 @@
     <?php endif; ?>
   </section>
 
-  <div id="navBar" data-sticky-container>
-  	<header id="masthead" class="site-header" role="banner" data-sticky data-options="marginTop:0;">
+  <div id="navBar">
+  	<header id="masthead" class="site-header">
       <div id="loadBar">
     		<span style="background-color: <?= $primaryColor ?>;width: 0">&nbsp;</span>
     	</div>

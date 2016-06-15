@@ -10,47 +10,55 @@
  * @since FoundationPress 1.0.0
  */
 get_header(); ?>
+<?php /* Convert hexdec color string to rgb(a) string */
+	function hex2rgba($color, $opacity = false) {
+		$default = 'rgb(0,0,0)';
+		//Return default if no color provided
+		if(empty($color)) {
+			return $default;
+		}
+		//Sanitize $color if "#" is provided
+		if ($color[0] == '#' ) {
+			$color = substr( $color, 1 );
+		}
+		//Check if color has 6 or 3 characters and get values
+		if (strlen($color) == 6) {
+			$hex = array( $color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5] );
+		} elseif ( strlen( $color ) == 3 ) {
+			$hex = array( $color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2] );
+		} else {
+			return $default;
+		}
+		//Convert hexadec to rgb
+		$rgb =  array_map('hexdec', $hex);
+		//Check if opacity is set(rgba or rgb)
+		if($opacity) {
+			if(abs($opacity) > 1) {
+				$opacity = 1.0;
+			}
+			$output = 'rgba('.implode(",",$rgb).','.$opacity.')';
+		} else {
+			$output = 'rgb('.implode(",",$rgb).')';
+		}
+		//Return rgb(a) color string
+		return $output;
+	}
+?>
 
 <section id="archiveTeam" role="main">
-	<!-- HEADLINE -->
-	<header class="headline pad"
-		data-0="transform: translate(0px, 0px)"
-		data-200="transform: translate(0px, -50px)"
-		data-400="transform: translate(0px, -100%)">
-		<div class="row align-center">
-			<div class="columns">
-				<h2><?php the_field("team_headline", "option"); ?></h2>
-			</div>
-
-			<div class="columns flex">
-				<div class="row button-group filter-button-group">
-					<button data-filter="*" class="is-checked">All</button>
-					<?php
-						$taxonomies = get_the_terms( $post->ID, 'team-filters');
-						foreach($taxonomies as $term) {
-							$slug = $term->slug;
-							echo "<button data-filter=\".$slug\">$slug</button> ";
-						}
-					?>
-				</div>
-			</div>
-		</div>
-	</header>
-	<!-- CLOSE HEADLINE -->
-
 	<article class="main-content pad">
 	<?php if ( have_posts() ) : ?>
-		<div class="row small-up-2 team-grid grid">
+		<div class="row small-up-2 medium-up-2 large-up-3 team-grid">
 
 		<?php while ( have_posts() ) : the_post(); ?>
-		  <div class="column
 			<?php
-				$taxonomies = get_the_terms( $post->ID, 'team-filters');
-				foreach($taxonomies as $term) {
-					$slug = $term->slug;
-					echo $slug . " ";
-				}
-			?>">
+				// Work Variabels
+				$setColor =  get_field('primary_color');
+				$color = $setColor;
+				$primary = hex2rgba($color, 0.8);
+
+			?>
+		  <div class="column">
 				<div class="team-block">
 					<a href="<?php the_permalink(); ?>">
 						<div class="thumbnail-overlay" style="background-color: <?php echo $primary; ?>">

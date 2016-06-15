@@ -13,19 +13,35 @@ $('a[href=#contact]').hover(
 
 // SlideToggle Contact Form
 $('a[href=#contact]').click(function(){
-  $('#contactForm').slideToggle( "slow", function() {});
-  $('.overlay').toggleClass('visible');
-  $('#closeForm').toggleClass('visible');
+  // Set a class so we can see test the state of the form
   $('body').toggleClass("contact");
+  //Toggle the overlay
+  $('.overlay').toggleClass('visible');
+
+  // If clicked while form is hidden
+  if ($('body').hasClass('contact')) {
+    // Scroll to top of page
+     $("html, body").animate({
+      scrollTop: 0
+     }, 600);
+     // Slidedown form
+     $('#contactForm').slideDown( 800, function() {
+       // after slide has finished animate in closeForm button
+       $('#closeForm').addClass('visible');
+     });
+  } else {
+    $('#closeForm').removeClass('visible');
+    $('#contactForm').slideUp( 800, function() {});
+  }
 
   if (!$('body').hasClass('mobile-nav')) {
-    $('body').toggleClass("fixed");
+     $('body').toggleClass("fixed");
   }
 });
 
 // Close Form Button
 $('#closeForm').click(function(){
-  $('#contactForm').slideUp( "slow", function() {});
+  $('#contactForm').slideUp( 800, function() {});
   $('.overlay').removeClass('visible');
   $('#closeForm').removeClass('visible');
   $('body').removeClass("contact");

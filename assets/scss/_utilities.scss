@@ -5,6 +5,7 @@ html, body {
 body.fixed, body.video-fixed {
   width: 100%;
   position: fixed;
+  padding-top: 0;
   top: 0;
   overflow: hidden;
 }
@@ -25,6 +26,10 @@ h5 {
 }
 a {
   transition: all 0.5s ease-in-out;
+}
+
+.expand {
+  max-width: 100%!important;
 }
 
 // buttons
@@ -70,6 +75,12 @@ a {
   padding: 90px 0;
 }
 
+// Flex
+.flex {
+  @include flex;
+  @include flex-align(center, middle);
+}
+
 // Contrast
 .contrast-text {
   color: $white;
@@ -88,7 +99,7 @@ a {
   height: 100%;
   width: 100%;
   background: rgba($white, 0.8);
-  transition: all 0.5s ease;
+  transition: all 1s ease;
   &.visible {
     opacity: 1;
 	  visibility: visible;
@@ -115,7 +126,6 @@ a {
     }
   }
 }
-
 
 // Markdown classes
 $margin: 40px;
@@ -203,6 +213,10 @@ blockquote {
   }
 }
 
+.present {
+  transition: all 1s ease;
+  transform: translate(0, 200px);
+}
 .push-down {
   margin-top: 0!important;
   transition: all 0.25s ease;
@@ -211,7 +225,7 @@ blockquote {
   transition: all 0.5s ease;
 }
 .push-up {
-  margin-top: -87px;
+  margin-top: -87px!important;
 }
 .blow-up {
   transform: scale(3)!important;
@@ -227,6 +241,22 @@ blockquote {
   }
   100% {
     transform: scale(1);
+  }
+}
+
+.headline {
+  position: fixed;
+  left: 0; right: 0;
+  margin: auto;
+  .row {
+    padding: 0 20px;
+    .columns {
+      padding: 30px;
+      background: $light-gray;
+    }
+  }
+  .button {
+    margin: 0;
   }
 }
 

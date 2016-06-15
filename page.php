@@ -37,8 +37,16 @@
  <?php endwhile;?>
 
  <?php do_action( 'foundationpress_after_content' ); ?>
- <?php get_sidebar(); ?>
+ <aside class="sidebar show-for-large" id="pageSidebar">
+   <div clas="row" data-sticky-container>
+     <div class="sticky" data-sticky data-top-anchor="pageSidebar:top" data-btm-anchor="contentFooter:top" data-check-every="0" data-options="marginTop:6;">
+
+       <?php get_sidebar(); ?>
+
+     </div>
+   </div>
+ </aside>
 
  </div>
 
- <?php get_footer();
+ <?php get_footer(); ?>

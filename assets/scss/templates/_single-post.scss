@@ -3,6 +3,7 @@
   margin-top: 3rem;
 
   .main-content {
+    background: $white;
     @include breakpoint(small) {
       @include grid-column(12);
     }

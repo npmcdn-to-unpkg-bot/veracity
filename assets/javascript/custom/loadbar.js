@@ -15,20 +15,24 @@ setTimeout(function(){
 }, 300);
 
 setTimeout(function(){
-  $('#featured-hero').addClass('animate-in');
-}, 500);
-
-setTimeout(function(){
   $('.main-content').addClass('animate-in').css({"transform":"translate(0,0)"});
   skrollr.init();
 
   if (skrollr.init().isMobile()) {
       skrollr.init().destroy();
   }
+  $('#featured-hero').addClass('animate-in');
   $('.parallax-bg').addClass('animate-in').css({"opacity": "1"});
-}, 700);
+}, 100);
 
 setTimeout(function(){
   $('.main-content').removeClass('animate-in');
   $('.parallax-bg').removeClass('animate-in');
-}, 1800);
+}, 500);
+
+// Present
+$('.present').each(function(index, element) {
+    $(element).delay(index*500).queue(function(){
+      $(this).css({"transform":"translate(0,0)"});
+    });
+});

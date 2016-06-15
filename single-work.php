@@ -18,8 +18,16 @@ get_header(); ?>
     data-0="margin-top: -60px;"
     data-top-bottom="margin-top: -800px;">
 		<div id="contentBody" class="entry-content">
+			<?php
+				$clients = get_field('client');
+				if( $clients ) {
+					foreach( $clients as $p ) {
+						$client = get_the_title( $p->ID );
+					}
+				}
+			?>
 			<header id="contentHeader">
-				<h1 class="entry-title"><?php the_title(); ?></h1>
+				<h1 class="entry-title"><?php the_title(); ?> <span style="color: #ccc"><?= $client; ?></span></h1>
 			</header>
 
 			<!-- Note: #contentBody is heavily formatted by javascript cause of the returned MarkDown -->

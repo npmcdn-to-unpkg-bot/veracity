@@ -41,14 +41,17 @@ get_header(); ?>
 
 <section id="archiveWork" role="main">
 	<!-- HEADLINE -->
-	<header class="headline pad">
+	<header class="headline pad"
+		data-0="transform: translate(0px, 0px)"
+		data-200="transform: translate(0px, -50px)"
+		data-400="transform: translate(0px, -100%)">
 	  <div class="row align-center">
-	    <div class="small-11 medium-8 columns">
+	    <div class="small-8 columns">
 	      <h2><?php the_field("work_headline", "option"); ?></h2>
 	    </div>
 
 	    <?php if( have_rows('work_ctas', "option") ) : ?>
-	      <div class="small-11 medium-4 columns button-jar">
+	      <div class="small-4 columns button-jar">
 	      <?php while ( have_rows('work_ctas', "option") ) : the_row(); ?>
 	        <a href="<?php the_sub_field('button_url'); ?>" class="button radius large"><?php if(get_sub_field('button_icon')) {the_sub_field('button_icon');} ?> <?php the_sub_field('button_value'); ?></a>
 	      <?php endwhile; ?>
@@ -59,9 +62,12 @@ get_header(); ?>
 	<!-- CLOSE HEADLINE -->
 
 
-	<article class=" pad">
-	<?php if ( have_posts() ) : $i = 0; // If we have posts let's begin ?>
-		<div class="row small-up-2 medium-up-2 large-up-3 work-grid">
+	<article class="pad" id="workPosts">
+	<?php query_posts($query_string."&featured=yes"); ?>
+	<?php if ( have_posts() ) : // If we have posts let's begin ?>
+		<div class="row post-grid"
+			data-top="margin-top:0"
+			data-end="margin-top:-200px">
 
 		<?php while ( have_posts() ) : the_post(); // Let's loop through all our posts at output each one while we have posts ?>
 			<?php
@@ -80,40 +86,80 @@ get_header(); ?>
 					}
 				}
 			?>
-		  <div class="column">
-				<div class="work-block">
+			<div class="columns small-12 feature-post present">
+				<a href="<?php the_permalink(); ?>" class="permalink">
+					<div class="hover-indicator" style="background: <?php the_field( 'primary_color' ) ?>"></div>
+					<div class="post-meta">
+						<h3><?php the_title(); ?></h3>
+						<h4><span class="float-right"><?= $client ?></span></h4>
+					</div>
+				</a>
+				<div class="post-block">
+					<?php
+						if ( has_post_thumbnail() ) {
+							the_post_thumbnail();
+						}
+					?>
 					<a href="#wistia_<?= $video; ?>?videoFoam=true&playerColor=<?= $secondary; ?>&videoQuality=hd-only">
-						<div class="thumbnail-overlay" style="background-color: <?= $primary; ?>">
-							<div class="play row align-middle">
-								<div class="columns">
-									<span><i class="fa fa-play" aria-hidden="true"></i></span>
-								</div>
-							</div>
+						<div class="thumbnail-overlay play" style="background-color: <?= $primary; ?>">
+							<span><i class="fa fa-play" aria-hidden="true"></i></span>
 						</div>
-					</a>
-					<a href="<?php the_permalink(); ?>">
-						<div class="work-meta row align-middle">
-							<div class="columns">
-								<h4 style="color:<?php the_field( 'primary_color' ) ?>"><?= $client ?></h4>
-								<h2><?php the_title(); ?></h2>
-							</div>
-						</div>
-						<?php
-							if ( has_post_thumbnail() ) {
-								the_post_thumbnail();
-							}
-						?>
 					</a>
 				</div>
 			</div>
 		<?php endwhile; ?>
 
-		<?php else : ?>
-			<?php get_template_part( 'template-parts/content', 'none' ); ?>
 		</div>
-
 		<?php endif; // End have_posts() check. ?>
+	<?php wp_reset_query(); ?>
 
+	<?php if ( have_posts() ) :  // If we have posts let's begin ?>
+		<div class="row small-up-2 medium-up-2 post-grid"
+		data-bottom-top="transform: translate(0px, 200px)"
+		data-center-top="transform: translate(0px,0px)">
+
+		<?php while ( have_posts() ) : the_post(); // Let's loop through all our posts at output each one while we have posts ?>
+			<?php
+				// Setting up some variabels to make life a little easier
+				$setColor =  get_field('primary_color');
+				$color = $setColor;
+				$primary = foundationpress_hex2rgba($color, 0.8);
+				$secondary = substr(get_field( 'secondary_color'), 1);
+				$video =  get_field('video_id');
+
+				// Have to do a lil loop to get the a-singular client
+				$clients = get_field('client');
+				if( $clients ) {
+					foreach( $clients as $p ) {
+			    	$client = get_the_title( $p->ID );
+					}
+				}
+			?>
+			<div class="column">
+				<a href="<?php the_permalink(); ?>" class="permalink">
+					<div class="hover-indicator" style="background: <?php the_field( 'primary_color' ) ?>"></div>
+					<div class="post-meta">
+						<h3><?= $client ?></h3>
+						<h4><span class="float-right"><?php the_title(); ?></span></h4>
+					</div>
+				</a>
+				<div class="post-block">
+					<?php
+						if ( has_post_thumbnail() ) {
+							the_post_thumbnail();
+						}
+					?>
+					<a href="#wistia_<?= $video; ?>?videoFoam=true&playerColor=<?= $secondary; ?>&videoQuality=hd-only">
+						<div class="thumbnail-overlay play" style="background-color: <?= $primary; ?>">
+							<span><i class="fa fa-play" aria-hidden="true"></i></span>
+						</div>
+					</a>
+				</div>
+			</div>
+		<?php endwhile; ?>
+
+		</div>
+		<?php endif; // End have_posts() check. ?>
 
 		<?php /* Display navigation to next/previous pages when applicable */ ?>
 		<?php if ( function_exists( 'foundationpress_pagination' ) ) { foundationpress_pagination(); } else if ( is_paged() ) { ?>

@@ -14,9 +14,12 @@
  } elseif ( is_post_type_archive('team') ) {
 	 $primaryColor = get_field( 'team_primary_color', 'option' );
 	 $secondaryColor = get_field( 'team_secondary_color', 'option' );
- } else {
+ } elseif (get_field( 'primary_color' ) && get_field( 'secondary_color' )) {
 	 $primaryColor = get_field( 'primary_color' );
 	 $secondaryColor = get_field( 'secondary_color' );
+ } else {
+   $primaryColor = get_field( 'global_primary_color', 'options' );
+   $secondaryColor = get_field( 'global_secondary_color', 'options' );
  }
 
 ?>
@@ -44,6 +47,12 @@
 		<?php wp_head(); ?>
 		<script src="https://use.typekit.net/kud3sdw.js"></script>
 		<script>try{Typekit.load({ async: true });}catch(e){}</script>
+
+    <?php if ( is_post_type_archive('team'))  : ?>
+      <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
+      <script src="https://npmcdn.com/isotope-layout@3.0/dist/isotope.pkgd.js"></script>
+    <?php endif; ?>
+
 		<style>
 			.top-bar .menu .colorize a, .home-link.colorize path {
 				color: <?= $primaryColor ?>;
@@ -72,7 +81,7 @@
       .feature-overlay {
         background: <?= $primaryColor ?>;
       }
-		</style>
+    </style>
 	</head>
 	<body <?php body_class(); ?>>
 	<div id="skrollr-body">
@@ -117,7 +126,7 @@
     <?php endif; ?>
   </section>
 
-  <div id="navBar" data-sticky-container>
+  <div id="navBar" data-sticky-container style="height:87px">
   	<header id="masthead" class="site-header" role="banner" data-sticky data-options="marginTop:0;">
       <div id="loadBar">
     		<span style="background-color: <?= $primaryColor ?>;width: 0">&nbsp;</span>
@@ -135,7 +144,6 @@
           </a>
   			</div>
         <button id="mobileToggle" class="menu-icon" type="button"></button>
-
   		</div>
 
   		<nav id="site-navigation" class="main-navigation top-bar" role="navigation" style="width:100%">
@@ -152,8 +160,7 @@
   							    </g>
   							</svg>
   						</a>
-  						<!-- <?php bloginfo( 'name' ); ?> -->
-  				</li>
+  				  </li>
   				</ul>
   			</div>
   			<div class="top-bar-right">

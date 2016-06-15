@@ -70,7 +70,10 @@
 .top-bar {
   height: 80px;
   position: relative;
-  z-index: 20;
+  z-index: 800;
+  ul {
+    background: none!important;
+  }
   #menu-primary {
     justify-content: flex-end;
   }

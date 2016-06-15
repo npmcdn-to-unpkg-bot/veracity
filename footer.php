@@ -14,15 +14,18 @@
  } elseif ( is_post_type_archive('team') ) {
 	 $primaryColor = get_field( 'team_primary_color', 'option' );
 	 $secondaryColor = get_field( 'team_secondary_color', 'option' );
- } else {
+ } elseif (get_field( 'primary_color' ) && get_field( 'secondary_color' )) {
 	 $primaryColor = get_field( 'primary_color' );
 	 $secondaryColor = get_field( 'secondary_color' );
+ } else {
+   $primaryColor = get_field( 'global_primary_color', 'options' );
+   $secondaryColor = get_field( 'global_secondary_color', 'options' );
  }
 
 ?>
 		</section>
 		<div id="footer-container" style="background-color: <?= $secondaryColor; ?>">
-			<footer id="footer" class="row">
+			<footer id="footer" class="row expand">
 				<div class="small-12 large-9 columns">
 					<h2><?php the_field( 'footer_headline', 'option' ); ?></h2>
 					<div class="footer-info float-left">

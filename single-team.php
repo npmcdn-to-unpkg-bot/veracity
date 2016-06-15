@@ -13,9 +13,8 @@ get_header(); ?>
 
 <section id="singleTeam" role="main" class="parallax-parent">
 	<div class="parallax-bg" style="background: url(<?php the_post_thumbnail_url( 'full' ); ?>)"
-		data-center-center="background-position: 50% 100px;"
-		data-top-bottom="background-position: 50% -200px"
-		data-anchor-target="#teamContent">
+		data-0="background-position: 50% 0px;"
+		data-end="background-position: 50% -200px">
 	</div>
 	<div class="team-container row expanded collapse">
 		<div class="columns small-11 large-7">

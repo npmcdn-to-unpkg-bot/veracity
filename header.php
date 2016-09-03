@@ -49,8 +49,8 @@
 		<script>try{Typekit.load({ async: true });}catch(e){}</script>
 
     <?php if ( is_post_type_archive('team'))  : ?>
-      <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
-      <script src="https://npmcdn.com/isotope-layout@3.0/dist/isotope.pkgd.js"></script>
+      <script src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
+      <script src="https://unpkg.com/isotope-layout@3.0/dist/isotope.pkgd.js"></script>
     <?php endif; ?>
 
 		<style>
